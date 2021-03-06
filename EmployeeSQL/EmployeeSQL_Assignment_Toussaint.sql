@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS title_id;
-
 -- Import  data from departments.csv
 CREATE TABLE departments (
 	dept_no VARCHAR(15) NOT NULL PRIMARY KEY,
@@ -12,19 +10,13 @@ CREATE TABLE titles (
 	title VARCHAR(25)
 );
 
-SELECT * FROM titles;
-
-DROP TABLE IF EXISTS salaries;
-
 -- Import  data from salaries.csv
 CREATE TABLE salaries (
 	emp_no INT NOT NULL PRIMARY KEY,
 	salary INT
 );
 
-SELECT * FROM dept_emp;
 
-DROP TABLE IF EXISTS dept_emp;
 -- Import  data from dept_emp.csv
 -- Created composite key
 CREATE TABLE dept_emp (
@@ -42,8 +34,6 @@ CREATE TABLE dept_manager (
 	emp_no INT
 );
 
-DROP TABLE IF EXISTS employees;
-
 -- Import  data from employees.csv
 CREATE TABLE employees (
 	emp_no INT NOT NULL PRIMARY KEY,
@@ -55,32 +45,24 @@ CREATE TABLE employees (
 	hire_date DATE
 );
 
-SELECT * FROM question_one;
-
-DROP VIEW Question_One;
 
 -- 1. List the following details of each employee: employee number, last name, first name, sex, and salary.
 -- Perform an LEFT JOIN on the two tables
 
-CREATE VIEW Question_One AS
 SELECT employees.emp_no, employees.last_name, employees.first_name, employees.sex, salaries.salary
 FROM salaries
 LEFT JOIN employees ON
 employees.emp_no=salaries.emp_no;
 
-SELECT * FROM Question_One;
 
 -- 2. List first name, last name, and hire date for employees who were hired in 1986.
-CREATE VIEW Question_Two AS
 SELECT first_name, last_name, hire_date
 FROM employees
 WHERE hire_date BETWEEN '1986-01-01' AND '1986-12-31'
 
-SELECT * FROM Question_Two;
 
 -- 3. List the manager of each department with the following information: department number, 
 --    department name, the manager's employee number, last name, first name.
-CREATE VIEW Question_Three AS
 SELECT departments.dept_no, departments.dept_name, dept_manager.emp_no,employees.last_name, employees.first_name
 FROM departments
 LEFT JOIN dept_manager ON departments.dept_no=dept_manager.dept_no

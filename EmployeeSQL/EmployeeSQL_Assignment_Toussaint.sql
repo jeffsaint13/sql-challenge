@@ -27,7 +27,6 @@ CREATE TABLE dept_emp (
 	FOREIGN KEY(dept_no) REFERENCES departments(dept_no)
 );
 
-DROP TABLE IF EXISTS dept_manager;
 -- Import  data from dept_manager.csv
 CREATE TABLE dept_manager (
 	dept_no VARCHAR,
